@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const github = require('../helpers/github.js')
+const github = require('../helpers/github.js');
+const db = require('../database/index.js');
 let app = express();
 
 app.use(bodyParser.json());
@@ -18,7 +19,16 @@ app.post('/repos', function (req, res) {
       console.log(err);
       return;
     }
-    res.send(repos)
+    var repos = JSON.parse(repos);
+    var repoNames = [];
+    repos.forEach(repo => {
+      var name = repo.name;
+
+      repoNames.push(name);
+      db.save(name);
+    });
+    
+    res.send(repoNames);
   });
 });
 

@@ -23,7 +23,7 @@ let getReposByUsername = (username, cb) => {
     if (err) {
       cb(err);
     }
-    cb(null, repos)
+    cb(null, repos);
   });
 
   

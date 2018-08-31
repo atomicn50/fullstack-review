@@ -3,20 +3,23 @@ mongoose.connect('mongodb://localhost/fetcher');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
-db.once('open', function(){console.log('connected!')})
+db.once('open', function(){console.log('mongoose connected!')})
 
 let repoSchema = new mongoose.Schema({
-  repoId: Number,
-  repoName: String,
-  owner: {login: String, id: Number}
+  repoName: String
 });
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (/* TODO */) => {
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
+let save = (repo) => {
+  //create new instance of Repo
+  var newRepo = new Repo({repoName: repo});
+  //save instance to db
+  newRepo.save();
 }
+
+Repo.find(function(err, docs) {
+  console.log(docs)
+})
 
 module.exports.save = save;

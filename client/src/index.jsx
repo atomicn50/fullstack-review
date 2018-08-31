@@ -19,8 +19,11 @@ class App extends React.Component {
       method: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({username: term}),
-      success: (data) => {
-        console.log('success', data);
+      success: (repos) => {
+        console.log('success', repos);
+        this.setState({
+          repos: repos
+        });
       },
       error: (err) => {
         console.log('error', err);
