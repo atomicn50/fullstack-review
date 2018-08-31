@@ -6,7 +6,9 @@ db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function(){console.log('connected!')})
 
 let repoSchema = new mongoose.Schema({
-  repoName: String
+  repoId: Number,
+  repoName: String,
+  owner: {login: String, id: Number}
 });
 
 let Repo = mongoose.model('Repo', repoSchema);
