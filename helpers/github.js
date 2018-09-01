@@ -25,9 +25,6 @@ let getReposByUsername = (username, cb) => {
     }
     cb(null, repos);
   });
-
-  
-
 }
 
 module.exports.getReposByUsername = getReposByUsername;

@@ -24,22 +24,17 @@ let save = (repo, forks, url) => {
 }
 
 let findTop25 = (callback) => {
-  Repo.find(function(err, repos) {
-    if (err) {
-      callback(err);
-    } else {
-      callback(null, repos)
-    }
-  }).sort({forks: 'descending'}).limit(25)
+  Repo.find(callback).sort({forks: 'descending'}).limit(25);
+
 }
 
 // Repo.deleteMany(function(err) {
 //   console.log(err);
 // });
 
-Repo.find(function(err, docs) {
-  docs.forEach(doc => {console.log(doc)})
-}).sort({forks: 'descending'}).limit(5)
+// Repo.find(function(err, docs) {
+//   docs.forEach(doc => {console.log(doc)})
+// }).sort({forks: 'descending'}).limit(5)
 
 
 

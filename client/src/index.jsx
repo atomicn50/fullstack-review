@@ -10,15 +10,16 @@ class App extends React.Component {
     this.state = { 
       repos: []
     }
+    this.getTopRepos = this.getTopRepos.bind(this);
   }
 
-  componentDidMount() {
-    console.log('INSIDE COMPONENT DID MOUNT')
+  getTopRepos() {
     $.ajax({
       url: 'http://localhost:1128/repos',
       method: 'GET',
       contentType: 'application/json',
       success: (repos) => {
+        console.log('inside get top repos')
         console.log(repos)
         this.setState({
           repos: repos
@@ -38,8 +39,7 @@ class App extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify({username: term}),
       success: (repos) => {
-        console.log('success with POST');
-        console.log(repos)
+        this.getTopRepos()
       },
       error: (err) => {
         console.log('error', err);

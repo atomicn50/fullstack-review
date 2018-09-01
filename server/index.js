@@ -28,21 +28,19 @@ app.post('/repos', function (req, res) {
      
       db.save(name, forks, url);
     });
-    
-    res.send();
+    res.send()
   });
 });
 
 app.get('/repos', function (req, res) {
-  db.findTop25(function(err, repos) {
+  db.findTop25(function(err, docs) {
     if (err) {
       console.log(err);
       return;
     }
     var repoNamesAndUrls = [];
-
-    repos.forEach(repo => {
-      repoNamesAndUrls.push({name: repo.repo, url: repo.url})
+    docs.forEach(doc => {
+      repoNamesAndUrls.push({name: doc.repo, url: doc.url})
     });
     res.send(repoNamesAndUrls)
   })
