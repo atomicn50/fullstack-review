@@ -23,7 +23,6 @@ app.post('/repos', function (req, res) {
     var repoNames = [];
     repos.forEach(repo => {
       var name = repo.name;
-
       repoNames.push(name);
       db.save(name);
     });
@@ -33,8 +32,7 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should send back the top 25 repos
+  // github.getReposByUsername
 });
 
 let port = 1128;

@@ -8,8 +8,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      repos: []
+      repos: [],
+      username: ''
     }
+  }
+
+  componentDidUpdate() {
+    console.log(this.state)
+    // $.ajax({
+    //   url: 'http://localhost:1128/repos',
+    //   method: 'GET',
+    //   contentType: 'application/json',
+      
+    // });
   }
 
   search (term) {
