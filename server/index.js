@@ -21,10 +21,13 @@ app.post('/repos', function (req, res) {
     }
     var repos = JSON.parse(repos);
     var repoNames = [];
+
     repos.forEach(repo => {
       var name = repo.name;
+      var forks = repo.forks;
+
       repoNames.push(name);
-      db.save(name);
+      db.save(name, forks);
     });
     
     res.send(repoNames);

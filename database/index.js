@@ -6,19 +6,29 @@ db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function(){console.log('mongoose conncted!')})
 
 let repoSchema = new mongoose.Schema({
-  repoName: String
+  repo: {
+    type: String,
+    dropDups: true
+  },
+  forks: Number
 });
+
+repoSchema.plugin(require('mongoose-plugin-drop-duplicates'));
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (repo) => {
-  var newRepo = new Repo({repoName: repo});
+let save = (repo, forks) => {
+  var newRepo = new Repo({repo: repo, forks: forks});
   newRepo.save();
 }
 
-// Repo.find(function(err, docs) {
-//   docs.forEach(doc => {console.log(doc.repoName)})
-// })
+// Repo.deleteMany(function(err) {
+//   console.log(err);
+// });
+
+Repo.find(function(err, docs) {
+  docs.forEach(doc => {console.log([doc.repo, 'forks: ', doc.forks])})
+})
 
 module.exports.save = save;
 // module.exports.find = Repo.find;
