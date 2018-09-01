@@ -22,13 +22,26 @@ let save = (repo, forks) => {
   newRepo.save();
 }
 
+let findTop25 = (callback) => {
+  Repo.find(function(err, repos) {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, repos)
+    }
+  }).sort({forks: 'descending'}).limit(25)
+}
+
 // Repo.deleteMany(function(err) {
 //   console.log(err);
 // });
 
 Repo.find(function(err, docs) {
   docs.forEach(doc => {console.log([doc.repo, 'forks: ', doc.forks])})
-})
+}).sort({forks: 'descending'}).limit(5)
+
+
 
 module.exports.save = save;
-// module.exports.find = Repo.find;
+module.exports.findTop25 = findTop25;
+

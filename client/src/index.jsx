@@ -8,19 +8,26 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      repos: [],
-      username: ''
+      repos: []
     }
   }
 
-  componentDidUpdate() {
-    console.log(this.state)
-    // $.ajax({
-    //   url: 'http://localhost:1128/repos',
-    //   method: 'GET',
-    //   contentType: 'application/json',
-      
-    // });
+  componentDidMount() {
+    console.log('INSIDE COMPONENT DID MOUNT')
+    $.ajax({
+      url: 'http://localhost:1128/repos',
+      method: 'GET',
+      contentType: 'application/json',
+      success: (repos) => {
+        console.log('sucess', repos);
+        this.setState({
+          repos: repos
+        });
+      },
+      error: (err) => {
+        console.log('error', err)
+      }
+    });
   }
 
   search (term) {
@@ -31,10 +38,10 @@ class App extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify({username: term}),
       success: (repos) => {
-        console.log('success', repos);
-        this.setState({
-          repos: repos
-        });
+        console.log('success with POST');
+        // this.setState({
+        //   repos: repos
+        // });
       },
       error: (err) => {
         console.log('error', err);

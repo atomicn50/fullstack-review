@@ -35,7 +35,18 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
-  // github.getReposByUsername
+  db.findTop25(function(err, repos) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    var repoNames = [];
+
+    repos.forEach(repo => {
+      repoNames.push(repo.repo)
+    });
+    res.send(repoNames)
+  })
 });
 
 let port = 1128;
