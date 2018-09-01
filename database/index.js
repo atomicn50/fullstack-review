@@ -10,15 +10,16 @@ let repoSchema = new mongoose.Schema({
     type: String,
     dropDups: true
   },
-  forks: Number
+  forks: Number,
+  url: String
 });
 
 repoSchema.plugin(require('mongoose-plugin-drop-duplicates'));
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (repo, forks) => {
-  var newRepo = new Repo({repo: repo, forks: forks});
+let save = (repo, forks, url) => {
+  var newRepo = new Repo({repo: repo, forks: forks, url: url});
   newRepo.save();
 }
 
@@ -37,7 +38,7 @@ let findTop25 = (callback) => {
 // });
 
 Repo.find(function(err, docs) {
-  docs.forEach(doc => {console.log([doc.repo, 'forks: ', doc.forks])})
+  docs.forEach(doc => {console.log(doc)})
 }).sort({forks: 'descending'}).limit(5)
 
 

@@ -20,17 +20,16 @@ app.post('/repos', function (req, res) {
       return;
     }
     var repos = JSON.parse(repos);
-    var repoNames = [];
 
     repos.forEach(repo => {
       var name = repo.name;
       var forks = repo.forks;
-
-      repoNames.push(name);
-      db.save(name, forks);
+      var url = repo.html_url;
+     
+      db.save(name, forks, url);
     });
     
-    res.send(repoNames);
+    res.send();
   });
 });
 
@@ -40,12 +39,12 @@ app.get('/repos', function (req, res) {
       console.log(err);
       return;
     }
-    var repoNames = [];
+    var repoNamesAndUrls = [];
 
     repos.forEach(repo => {
-      repoNames.push(repo.repo)
+      repoNamesAndUrls.push({name: repo.repo, url: repo.url})
     });
-    res.send(repoNames)
+    res.send(repoNamesAndUrls)
   })
 });
 

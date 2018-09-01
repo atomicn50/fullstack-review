@@ -19,7 +19,7 @@ class App extends React.Component {
       method: 'GET',
       contentType: 'application/json',
       success: (repos) => {
-        console.log('sucess', repos);
+        console.log(repos)
         this.setState({
           repos: repos
         });
@@ -39,9 +39,7 @@ class App extends React.Component {
       data: JSON.stringify({username: term}),
       success: (repos) => {
         console.log('success with POST');
-        // this.setState({
-        //   repos: repos
-        // });
+        console.log(repos)
       },
       error: (err) => {
         console.log('error', err);
