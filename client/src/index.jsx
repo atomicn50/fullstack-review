@@ -19,8 +19,6 @@ class App extends React.Component {
       method: 'GET',
       contentType: 'application/json',
       success: (repos) => {
-        console.log('inside get top repos')
-        console.log(repos)
         this.setState({
           repos: repos
         });
@@ -32,7 +30,6 @@ class App extends React.Component {
   }
 
   search (term) {
-    console.log(`${term} was searched`);
     $.ajax({
       url: 'http://localhost:1128/repos',
       method: 'POST',

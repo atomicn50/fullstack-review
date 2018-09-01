@@ -18,6 +18,3 @@ const Repo = (props) => (
 
 export default RepoList;
 
-<a href="#" onclick="console.log('The link was clicked.')">
-  Click me 
-</a>
